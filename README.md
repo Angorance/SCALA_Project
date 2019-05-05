@@ -2,6 +2,8 @@
 
 Scala project at HEIG-VD | 2019
 
+Châtillon Jérémie, Gonzalez Lopez Daniel, Smith James
+
 ## But
 
 Le but de ce projet est de réaliser une application pour le Chill Out permettant de consulter les articles (infos, prix, popularité), d'attribuer des notes à ces derniers et de pouvoir demander un serveur s'il n'y a personne sur place. La requête serait alors transmise au staff (utilisateurs connectés) via une notification et un staff disponible pourra prévenir les autres qu'il s'en occupe.
