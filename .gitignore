@@ -1,2 +1,8 @@
 *.class
 *.log
+
+# IDE
+.vscode
+
+# MISC
+**.DS_Store
