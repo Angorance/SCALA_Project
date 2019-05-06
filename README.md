@@ -20,6 +20,6 @@ Note : Une autre solution pour remplacer les notifications serait de passer par 
 
 * Front-end Android et/ou Web
 
-* Base de données SQL avec Slick. Notre application n'ayant pas de critères spécifiques, partir sur une base de données SQL assez simple paraît être la meilleure solution. Ou alors une base de données NoSQL avec des modèles fixes.
+* Base de données SQL avec Slick. Notre application n'ayant pas de critères spécifiques, partir sur une base de données SQL assez simple paraît être la meilleure solution.
 
 * Flutter dans le cas où on partirait sur on front-end Android. Plus rapide à prendre en main, cross-platform.
