@@ -2,4 +2,5 @@
 echo 'plz change your root pwd and remove the .default' # after changing password you can remove this line
 
 # Uncomment bellow
-#docker run --name mysql-chillout -e MYSQL_DATABASE=chillout -e MYSQL_ROOT_PASSWORD=my-secret-password -d mysql:latest
+#docker rm mysql-chillout
+#docker run --name mysql-chillout -e MYSQL_DATABASE=mysql-chillout -e MYSQL_ROOT_PASSWORD=my-secret-password -d mysql:latest
