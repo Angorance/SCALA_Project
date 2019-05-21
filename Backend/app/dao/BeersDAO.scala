@@ -33,7 +33,7 @@ trait BeersComponent {
 // driver. The class extends the Beers' query table and loads the JDBC profile configured in the application's
 // configuration file.
 @Singleton
-class BeerDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(implicit executionContext: ExecutionContext) extends BeersComponent with HasDatabaseConfigProvider[JdbcProfile] {
+class BeersDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(implicit executionContext: ExecutionContext) extends BeersComponent with HasDatabaseConfigProvider[JdbcProfile] {
   import profile.api._
 
   // Get the object-oriented list of Beers directly from the query table.
