@@ -59,6 +59,23 @@ class BeersController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO) ex
   }
 
   /**
+    * Get the Beer identified by the given ID, then return it as JSON.
+    */
+  def getBeer(beerId: Long) = Action.async {
+    val optionalBeer = BeersDAO.findById(beerId)
+
+    optionalBeer.map {
+      case Some(s) => Ok(Json.toJson(s))
+      case None =>
+        // Send back a 404 Not Found HTTP status to the client if the Beer does not exist.
+        NotFound(Json.obj(
+          "status" -> "Not Found",
+          "message" -> ("Beer #" + beerId + " not found.")
+        ))
+    }
+  }
+
+  /**
     * Parse the POST request, validate the request's body, then create a new Beer based on the sent JSON payload, and
     * finally sends back a JSON response.
     * The action expects a request with a Content-Type header of text/json or application/json and a body containing a
@@ -79,23 +96,6 @@ class BeersController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO) ex
         )
       )
     )
-  }
-
-  /**
-    * Get the Beer identified by the given ID, then return it as JSON.
-    */
-  def getBeer(beerId: Long) = Action.async {
-    val optionalBeer = BeersDAO.findById(beerId)
-
-    optionalBeer.map {
-      case Some(s) => Ok(Json.toJson(s))
-      case None =>
-        // Send back a 404 Not Found HTTP status to the client if the Beer does not exist.
-        NotFound(Json.obj(
-          "status" -> "Not Found",
-          "message" -> ("Beer #" + beerId + " not found.")
-        ))
-    }
   }
 
   /**
@@ -129,6 +129,21 @@ class BeersController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO) ex
         Json.obj(
           "status"  -> "OK",
           "message" -> ("Beer #" + beerId + " deleted.")
+        )
+      )
+      case 0 => NotFound(Json.obj(
+        "status" -> "Not Found",
+        "message" -> ("Beer #" + beerId + " not found.")
+      ))
+    }
+  }
+
+  def archivedBeer(beerId: Long) = Action.async {
+    BeersDAO.archived(beerId).map {
+      case 1 => Ok(
+        Json.obj(
+          "status" -> "OK",
+          "message" -> ("Beer #'" + beerId  + "' updated.")
         )
       )
       case 0 => NotFound(Json.obj(

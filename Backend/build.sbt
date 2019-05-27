@@ -16,4 +16,4 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "4.0.0" // Slick
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.24" // Connecteur MySQL
-libraryDependencies += "play-silhouette-password-bcrypt" % "4.0.0"
+libraryDependencies += "org.mindrot" % "jbcrypt" % "0.3m"

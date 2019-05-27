@@ -20,11 +20,14 @@ trait BeersComponent {
     def volume = column[Int]("VOLUME")
     def description = column[String]("DESCRIPTION")
     def isArchived = column[Boolean]("ISARCHIVED")
+    def rankingValue = column[Int]("RANKINGVALUE")
+    def nbRanking = column[Int]("NBRANKING")
+    def picture = column[String]("PICTURE")
     def provenance = column[String]("PROVENANCE")
     def alcool = column[Float]("ALCOOL")
 
     // Map the attributes with the model; the ID is optional.
-    def * = (id.?, name, volume, description, isArchived, provenance, alcool) <> (Beer.tupled, Beer.unapply)
+    def * = (id.?, name, volume, description, isArchived, picture, rankingValue, nbRanking, provenance, alcool) <> (Beer.tupled, Beer.unapply)
   }
 }
 
@@ -56,23 +59,35 @@ class BeersDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
     db.run(query.result)
   }*/
 
-  /** Retrieve a student from the id. */
+  /** Retrieve a beer from the id. */
   def findById(id: Long): Future[Option[Beer]] =
     db.run(Beers.filter(_.id === id).result.headOption)
 
-  /** Insert a new student, then return it. */
+  /** Insert a new beer, then return it. */
   def insert(beer: Beer): Future[Beer] = {
     val insertQuery = Beers returning Beers.map(_.id) into ((beer, id) => beer.copy(Some(id)))
     db.run(insertQuery += beer)
   }
 
-  /** Update a student, then return an integer that indicate if the student was found (1) or not (0). */
+  /** Update a beer, then return an integer that indicate if the student was found (1) or not (0). */
   def update(id: Long, beer: Beer): Future[Int] = {
-    val studentToUpdate: Beer = beer.copy(Some(id))
-    db.run(Beers.filter(_.id === id).update(studentToUpdate))
+    val beerToUpdate: Beer = beer.copy(Some(id))
+    db.run(Beers.filter(_.id === id).update(beerToUpdate))
   }
 
-  /** Delete a student, then return an integer that indicate if the student was found (1) or not (0). */
+  /** Delete a beer, then return an integer that indicate if the student was found (1) or not (0). */
   def delete(id: Long): Future[Int] =
     db.run(Beers.filter(_.id === id).delete)
+
+  /** Archived a beer */
+  def archived(id: Long): Future[Int] = {
+    val targetRows = Beers.filter(_.id === id).map(_.isArchived)
+    val actions = for {
+      booleanOption <- targetRows.result.headOption
+      updateActionOption = booleanOption.map(b => targetRows.update(!b))
+      affected <- updateActionOption.getOrElse(DBIO.successful(0))
+    } yield affected
+
+    db.run(actions)
+  }
 }

@@ -8,6 +8,7 @@ import play.api.libs.json._
 import play.api.libs.json.Reads._
 import play.api.libs.functional.syntax._
 import play.api.mvc.{AbstractController, ControllerComponents}
+import org.mindrot.jbcrypt.BCrypt
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -60,9 +61,10 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
   def createStaff = Action.async(validateJson[Staff]) { implicit request =>
     // `request.body` contains a fully validated `Staff` instance, since it has been validated by the `validateJson`
     // helper above.
-    val Staff = request.body
+    val pseudo = request.body.pseudo
+    val password = request.body.password
+    val Staff = Staff(pseudo, BCrypt.hashpw(password, BCrypt.gensalt()))
     val createdStaff = StaffsDAO.insert(Staff)
-
     createdStaff.map(s =>
       Ok(
         Json.obj(
@@ -131,15 +133,21 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
     }
   }
 
-  def login(StaffPseudo: String, StaffPwd: String): Unit = Action.async {
-    val optionalStaff = StaffsDAO.findByPseudo(StaffPseudo)
+  def signIn() = Action.async(validateJson[Staff]) { implicit request =>
+    val pseudo = request.body.pseudo
+    val password = request.body.password
+    val optionalStaff = StaffsDAO.findByPseudo(pseudo)
     optionalStaff.map {
-      case Some(s) => Ok(Json.toJson(s))
+      case Some(s) if BCrypt.checkpw(password, s.password)=> Ok(Json.toJson(s)) // TODO should return jwt
+      case Some(s) => NotFound(Json.obj(
+        "status" -> "Not Found",
+        "message" -> ("Staff Wrong password")
+      ))
       case None =>
         // Send back a 404 Not Found HTTP status to the client if the Staff does not exist.
         NotFound(Json.obj(
           "status" -> "Not Found",
-          "message" -> ("Staff #" + StaffPseudo + " do not exist")
+          "message" -> ("Staff " + pseudo + " do not exist")
         ))
     }
   }
