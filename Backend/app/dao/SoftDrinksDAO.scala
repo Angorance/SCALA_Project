@@ -8,7 +8,7 @@ import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
 // We use a trait component here in order to share the SoftDrinksTable class with other DAO, thanks to the inheritance.
-trait SoftDrinksComponent {
+trait SoftDrinksComponent extends DrinksComponent {
   self: HasDatabaseConfigProvider[JdbcProfile] =>
 
   import profile.api._
@@ -16,17 +16,15 @@ trait SoftDrinksComponent {
   // This class convert the database's SoftDrinks table in a object-oriented entity: the Student model.
   class SoftDrinksTable(tag: Tag) extends Table[SoftDrink](tag, "SoftDrinks") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc) // Primary key, auto-incremented
-    def name = column[String]("NAME")
-    def volume = column[Int]("VOLUME")
-    def description = column[String]("DESCRIPTION")
-    def isArchived = column[Boolean]("ISARCHIVED")
-    def rankingValue = column[Int]("RANKINGVALUE")
-    def nbRanking = column[Int]("NBRANKING")
-    def picture = column[String]("PICTURE")
+    def drinkId = column[Long]("DRINK_ID")
+
+    def drink = foreignKey("DRINK_FK", drinkId, drinks)(_.id)
 
     // Map the attributes with the model; the ID is optional.
-    def * = (id.?, name, volume, description, isArchived, picture, rankingValue, nbRanking) <> (SoftDrink.tupled, SoftDrink.unapply)
+    def * = (id.?, drinkId) <> (SoftDrink.tupled, SoftDrink.unapply)
   }
+
+  lazy val softDrinks = TableQuery[SoftDrinksTable]
 }
 
 // This class contains the object-oriented list of SoftDrinks and offers methods to query the data.
@@ -42,7 +40,10 @@ class SoftDrinksDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 
   /** Retrieve the list of SoftDrinks */
   def list(): Future[Seq[SoftDrink]] = {
-    val query = SoftDrinks.sortBy(s => s.name)
+    val query = (for {
+      beer <- softDrinks
+      drink <- beer.drink
+    } yield (drink, beer)).sortBy(_._1.name)
     db.run(query.result)
   }
 
@@ -78,7 +79,7 @@ class SoftDrinksDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
     db.run(SoftDrinks.filter(_.id === id).delete)
 
   /** Archived a SoftDrink */
-  def archived(id: Long): Future[Int] = {
+  /*def archived(id: Long): Future[Int] = {
     val targetRows = SoftDrinks.filter(_.id === id).map(_.isArchived)
     val actions = for {
       booleanOption <- targetRows.result.headOption
@@ -87,5 +88,5 @@ class SoftDrinksDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
     } yield affected
 
     db.run(actions)
-  }
+  }*/
 }

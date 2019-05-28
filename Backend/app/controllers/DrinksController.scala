@@ -15,7 +15,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class DrinksController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO, SoftDrinksDAO: SoftDrinksDAO) extends AbstractController(cc) {
 
   // Convert a Drink-model object into a JsValue representation, which means that we serialize it into JSON.
-  implicit val BeerToJson: Writes[Beer] = (
+  /*implicit val BeerToJson: Writes[Beer] = (
     (JsPath \ "id").write[Option[Long]] and
       (JsPath \ "name").write[String] and
       (JsPath \ "volume").write[Int] and
@@ -40,7 +40,7 @@ class DrinksController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO, S
       (JsPath \ "alcool").read[Float](min(0f))
     // Use the default 'apply' method (which acts like a constructor) of the Beer case class with the JsValue in order
     // to construct a Beer object from it.
-    )(Beer.apply _)
+    )(Beer.apply _)*/
 
   /** Title */
   val title = "Drinks Chillout"
