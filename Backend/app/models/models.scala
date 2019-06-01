@@ -1,19 +1,15 @@
 package models
 
-trait Drink {
-  def id: Option[Long]
-  def name: String
-  def volume: Int
-  def description: String
-  def isArchived: Boolean
-  def value: Int
-  def nbVotes: Int
-
+trait DrinkTrait {
+  val id: Option[Long]
+  val drinkId: Long
 }
 
-case class SoftDrink(id: Option[Long], name: String, volume: Int, description: String, isArchived: Boolean = false, value: Int, nbVotes: Int) extends Drink
+case class Drink(id: Option[Long], name: String, volume: Int, description: String, isArchived: Boolean, rankingValue: Int, nbRanking: Int, picture: String)
 
-case class Beer(id: Option[Long], name: String, volume: Int, description: String, isArchived: Boolean = false, value: Int, nbVotes: Int, provenance: String, alcool: Float) extends Drink
+case class SoftDrink(id: Option[Long], drinkId: Long) extends DrinkTrait
+
+case class Beer(id: Option[Long], drinkId: Long, provenance: String, alcool: Float) extends DrinkTrait
 
 case class BeerOfTheMonth (id: Option[Long], beerId: Long, month: Int, year: Int)
 

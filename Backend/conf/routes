@@ -1,4 +1,3 @@
-
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
@@ -15,4 +14,14 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /beers                      controllers.BeersController.getBeers
 
-      
+GET     /beer/:beerId               controllers.BeersController.getBeer(beerId: Long)
+
+PUT     /beer/:beerId               controllers.BeersController.updateBeer(beerId: Long)
+
+PUT     /beer/:beerId/archived      controllers.BeersController.archivedBeer(beerId: Long)
+
+POST    /beers                      controllers.BeersController.createBeer
+
+
+
+POST    /authentication             controllers.StaffsController.signIn
