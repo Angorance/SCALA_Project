@@ -9,6 +9,9 @@
 #GET     /message                    controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
+
+GET     /                           controllers.DrinksController.getDrinks
+
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 #GET     /beers                      controllers.BeersController.getBeers
