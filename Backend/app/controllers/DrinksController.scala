@@ -1,12 +1,8 @@
 package controllers
 
-import dao.BeersDAO
-import dao.SoftDrinksDAO
+import dao.{BeersDAO, SoftDrinksDAO}
 import javax.inject.{Inject, Singleton}
-import models.{Beer, SoftDrink}
 import play.api.libs.json._
-import play.api.libs.json.Reads._
-import play.api.libs.functional.syntax._
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -67,6 +63,7 @@ class DrinksController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO, S
       softDrinks <- softDrinksList
     } yield Ok(views.html.drinks(title, beers, softDrinks))
   }
+
 
   /**
     * Parse the POST request, validate the request's body, then create a new Drink based on the sent JSON payload, and

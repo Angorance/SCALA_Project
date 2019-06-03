@@ -76,9 +76,10 @@
                             <!--
                             <li><a><i class="fa fa-user fa-fw"></i>${principal}</a></li>
                             <li class="divider"></li>
-                            <li><a href="pages/userSettings"><i class="fa fa-cog fa-fw"></i> User Profile</a>
-                            </li>
                             -->
+                            <li><a href="@routes.ChatController.chat()"><i class="fa fa-cog fa-fw"></i> Chat ID</a>
+                            </li>
+
                             <li class="divider"></li>
                             <li><a id="bLogoutLocator" href="./auth?action=logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
@@ -94,7 +95,7 @@
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li>
-                                <a id="bDashboardSideBar" href="pages/applications"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                                <a id="bDashboardSideBar" href="@routes.DrinksController.getDrinks()"><i class="fa fa-dashboard fa-fw"></i> Drinks</a>
                             </li>
                             <li>
                                 <a id="AboutSideBar" href="@routes.AboutController.about()"><i class="fa fa-about fa-fw"></i> About</a>

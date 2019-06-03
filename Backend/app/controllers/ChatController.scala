@@ -2,10 +2,6 @@ package controllers
 
 import dao.ChatDAO
 import javax.inject.Inject
-import models.Chat
-import play.api.data.Form
-import play.api.data.Forms.mapping
-import play.api.data.Forms.text
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 class ChatController @Inject()(cc: ControllerComponents, chatDAO: ChatDAO) extends AbstractController(cc) {
@@ -13,4 +9,14 @@ class ChatController @Inject()(cc: ControllerComponents, chatDAO: ChatDAO) exten
   /*val chatForm = Form(
     mapping(
       "chatId" -> text())(Chat.apply)(Chat.unapply))*/
+
+  def postChatID = Action {
+    Ok(views.html.chat("oldCHat"))
+  }
+
+  def chat = Action {
+
+    // TODO Fetch data
+    Ok(views.html.chat("oldCHat"))
+  }
 }
