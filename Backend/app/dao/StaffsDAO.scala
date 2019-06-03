@@ -14,7 +14,7 @@ trait StaffsComponent {
   import profile.api._
 
   // This class convert the database's Staffs table in a object-oriented entity: the Student model.
-  class StaffsTable(tag: Tag) extends Table[Staff](tag, "Staffs") {
+  class StaffsTable(tag: Tag) extends Table[Staff](tag, "Staff") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc) // Primary key, auto-incremented
     def pseudo = column[String]("PSEUDO")
     def password = column[String]("PASSWORD")

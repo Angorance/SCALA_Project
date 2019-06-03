@@ -68,7 +68,7 @@ CREATE TABLE `Chat` (
 -- Structure de la table `DrikBlackList`
 --
 
-DROP TABLE IF EXISTS `DrikBlackList`;
+DROP TABLE IF EXISTS `DrinkBlackList`;
 CREATE TABLE `DrikBlackList` (
   `idx_drink` int(11) NOT NULL,
   `idx_blackList` int(11) NOT NULL
@@ -101,7 +101,7 @@ CREATE TABLE `Drink` (
 DROP TABLE IF EXISTS `SoftDrink`;
 CREATE TABLE `SoftDrink` (
   `id` int(11) NOT NULL,
-  `idx_beer` int(11) NOT NULL
+  `idx_drink` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -183,7 +183,7 @@ ALTER TABLE `Drink`
 --
 ALTER TABLE `SoftDrink`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_beer` (`idx_beer`);
+  ADD UNIQUE KEY `idx_drink` (`idx_drink`);
 
 --
 -- Index pour la table `Staff`
@@ -240,7 +240,7 @@ ALTER TABLE `Drink`
 -- Contraintes pour la table `SoftDrink`
 --
 ALTER TABLE `SoftDrink`
-  ADD CONSTRAINT `softDring_gen_drink` FOREIGN KEY (`idx_beer`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `softDring_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `StorageDrink`

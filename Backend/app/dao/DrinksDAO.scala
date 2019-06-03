@@ -14,7 +14,7 @@ trait DrinksComponent {
   import profile.api._
 
   // This class convert the database's Drinks table in a object-oriented entity: the Student model.
-  class DrinksTable(tag: Tag) extends Table[Drink](tag, "Drinks") {
+  class DrinksTable(tag: Tag) extends Table[Drink](tag, "Drink") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc) // Primary key, auto-incremented
     def name = column[String]("NAME")
     def volume = column[Int]("VOLUME")

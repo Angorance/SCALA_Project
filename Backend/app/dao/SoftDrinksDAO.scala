@@ -14,9 +14,9 @@ trait SoftDrinksComponent extends DrinksComponent {
   import profile.api._
 
   // This class convert the database's SoftDrinks table in a object-oriented entity: the Student model.
-  class SoftDrinksTable(tag: Tag) extends Table[SoftDrink](tag, "SoftDrinks") {
+  class SoftDrinksTable(tag: Tag) extends Table[SoftDrink](tag, "SoftDrink") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc) // Primary key, auto-incremented
-    def drinkId = column[Long]("DRINK_ID")
+    def drinkId = column[Long]("IDX_DRINK")
 
     def drink = foreignKey("DRINK_FK", drinkId, drinks)(_.id)
 
