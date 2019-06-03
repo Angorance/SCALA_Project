@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le :  sam. 01 juin 2019 à 17:12
+-- Généré le :  lun. 03 juin 2019 à 13:14
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.14
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `mysql-chillout`
 --
+CREATE DATABASE IF NOT EXISTS `mysql-chillout` DEFAULT CHARACTER SET utf8  COLLATE utf8_general_ci ;
+USE `mysql-chillout`;
 
 -- --------------------------------------------------------
 
@@ -28,6 +30,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `Beer`
 --
 
+DROP TABLE IF EXISTS `Beer`;
 CREATE TABLE `Beer` (
   `id` int(11) NOT NULL,
   `provenance` varchar(256) NOT NULL,
@@ -41,6 +44,7 @@ CREATE TABLE `Beer` (
 -- Structure de la table `BlackList`
 --
 
+DROP TABLE IF EXISTS `BlackList`;
 CREATE TABLE `BlackList` (
   `id` int(11) NOT NULL,
   `mac` varchar(20) NOT NULL
@@ -49,10 +53,23 @@ CREATE TABLE `BlackList` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `drikBlackList`
+-- Structure de la table `Chat`
 --
 
-CREATE TABLE `drikBlackList` (
+DROP TABLE IF EXISTS `Chat`;
+CREATE TABLE `Chat` (
+  `id` int(11) NOT NULL,
+  `chatId` varchar(32) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `DrikBlackList`
+--
+
+DROP TABLE IF EXISTS `DrikBlackList`;
+CREATE TABLE `DrikBlackList` (
   `idx_drink` int(11) NOT NULL,
   `idx_blackList` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,6 +80,7 @@ CREATE TABLE `drikBlackList` (
 -- Structure de la table `Drink`
 --
 
+DROP TABLE IF EXISTS `Drink`;
 CREATE TABLE `Drink` (
   `id` int(11) NOT NULL,
   `volume` int(11) NOT NULL,
@@ -80,6 +98,7 @@ CREATE TABLE `Drink` (
 -- Structure de la table `SoftDrink`
 --
 
+DROP TABLE IF EXISTS `SoftDrink`;
 CREATE TABLE `SoftDrink` (
   `id` int(11) NOT NULL,
   `idx_beer` int(11) NOT NULL
@@ -91,6 +110,7 @@ CREATE TABLE `SoftDrink` (
 -- Structure de la table `Staff`
 --
 
+DROP TABLE IF EXISTS `Staff`;
 CREATE TABLE `Staff` (
   `id` int(11) NOT NULL,
   `password` varchar(1024) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
@@ -103,6 +123,7 @@ CREATE TABLE `Staff` (
 -- Structure de la table `Storage`
 --
 
+DROP TABLE IF EXISTS `Storage`;
 CREATE TABLE `Storage` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL
@@ -114,6 +135,7 @@ CREATE TABLE `Storage` (
 -- Structure de la table `StorageDrink`
 --
 
+DROP TABLE IF EXISTS `StorageDrink`;
 CREATE TABLE `StorageDrink` (
   `idx_drink` int(11) NOT NULL,
   `idx_storage` int(11) NOT NULL,
@@ -138,9 +160,15 @@ ALTER TABLE `BlackList`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `drikBlackList`
+-- Index pour la table `Chat`
 --
-ALTER TABLE `drikBlackList`
+ALTER TABLE `Chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `DrikBlackList`
+--
+ALTER TABLE `DrikBlackList`
   ADD KEY `ref_blackList` (`idx_blackList`),
   ADD KEY `ref_drinks` (`idx_drink`);
 
@@ -197,9 +225,9 @@ ALTER TABLE `Beer`
   ADD CONSTRAINT `beer_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `drikBlackList`
+-- Contraintes pour la table `DrikBlackList`
 --
-ALTER TABLE `drikBlackList`
+ALTER TABLE `DrikBlackList`
   ADD CONSTRAINT `ref_blackList` FOREIGN KEY (`idx_blackList`) REFERENCES `BlackList` (`id`);
 
 --

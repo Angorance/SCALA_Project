@@ -20,3 +20,5 @@ case class StorageDrinks(id: Option[Long], quantity: Int, storageId: Long, drink
 case class BlackList(id: Option[Long], mac: String, drinkId: Long)
 
 case class Staff(id: Option[Long], pseudo: String, password: String)
+
+case class Chat(id:Option[Long], chatId: String)
