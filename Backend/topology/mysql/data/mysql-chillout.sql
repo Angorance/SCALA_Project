@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `mysql-chillout`
 --
+CREATE DATABASE IF NOT EXISTS `mysql-chillout` DEFAULT CHARACTER SET utf8  COLLATE utf8_general_ci ;
+USE `mysql-chillout`;
 
 -- --------------------------------------------------------
 
@@ -51,11 +53,11 @@ CREATE TABLE `BlackList` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `chat`
+-- Structure de la table `Chat`
 --
 
-DROP TABLE IF EXISTS `chat`;
-CREATE TABLE `chat` (
+DROP TABLE IF EXISTS `Chat`;
+CREATE TABLE `Chat` (
   `id` int(11) NOT NULL,
   `chatId` varchar(32) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,11 +65,11 @@ CREATE TABLE `chat` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `drikBlackList`
+-- Structure de la table `DrikBlackList`
 --
 
-DROP TABLE IF EXISTS `drikBlackList`;
-CREATE TABLE `drikBlackList` (
+DROP TABLE IF EXISTS `DrikBlackList`;
+CREATE TABLE `DrikBlackList` (
   `idx_drink` int(11) NOT NULL,
   `idx_blackList` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -158,15 +160,15 @@ ALTER TABLE `BlackList`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `chat`
+-- Index pour la table `Chat`
 --
-ALTER TABLE `chat`
+ALTER TABLE `Chat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `drikBlackList`
+-- Index pour la table `DrikBlackList`
 --
-ALTER TABLE `drikBlackList`
+ALTER TABLE `DrikBlackList`
   ADD KEY `ref_blackList` (`idx_blackList`),
   ADD KEY `ref_drinks` (`idx_drink`);
 
@@ -223,9 +225,9 @@ ALTER TABLE `Beer`
   ADD CONSTRAINT `beer_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `drikBlackList`
+-- Contraintes pour la table `DrikBlackList`
 --
-ALTER TABLE `drikBlackList`
+ALTER TABLE `DrikBlackList`
   ADD CONSTRAINT `ref_blackList` FOREIGN KEY (`idx_blackList`) REFERENCES `BlackList` (`id`);
 
 --
