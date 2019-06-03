@@ -1,7 +1,7 @@
 package dao;
 
 import javax.inject.{Inject, Singleton}
-import models.SoftDrink
+import models.{SoftDrink, Drink}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 
@@ -39,11 +39,11 @@ class SoftDrinksDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProv
   val SoftDrinks = TableQuery[SoftDrinksTable]
 
   /** Retrieve the list of SoftDrinks */
-  def list(): Future[Seq[SoftDrink]] = {
+  def list(): Future[Seq[(Drink, SoftDrink)]] = {
     val query = (for {
-      beer <- softDrinks
-      drink <- beer.drink
-    } yield (drink, beer)).sortBy(_._1.name)
+      softDrink <- softDrinks
+      drink <- softDrink.drink
+    } yield (drink, softDrink)).sortBy(_._1.name)
     db.run(query.result)
   }
 
