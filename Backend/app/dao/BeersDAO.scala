@@ -73,7 +73,7 @@ class BeersDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
   }
 
   /** Insert a new beer, then return it. */
-  def insert(beer: Beer): Future[(Beer, Drink)] = {
+  def insert(beer: Beer): Future[Beer] = {
     val insertQuery = Beers returning Beers.map(_.id) into ((beer, id) => beer.copy(Some(id)))
     db.run(insertQuery += beer)
   }

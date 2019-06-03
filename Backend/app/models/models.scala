@@ -5,7 +5,7 @@ trait DrinkTrait {
   val drinkId: Long
 }
 
-case class Drink(id: Option[Long], name: String, volume: Int, description: String, isArchived: Boolean, rankingValue: Int, nbRanking: Int, picture: String)
+case class Drink(id: Option[Long], name: String, volume: Int, description: String, isArchived: Boolean, picture: String, rankingValue: Int, nbRanking: Int)
 
 case class SoftDrink(id: Option[Long], drinkId: Long) extends DrinkTrait
 

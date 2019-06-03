@@ -63,7 +63,7 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
     // helper above.
     val pseudo = request.body.pseudo
     val password = request.body.password
-    val Staff = Staff(pseudo, BCrypt.hashpw(password, BCrypt.gensalt()))
+    val Staff = new Staff(null, pseudo, BCrypt.hashpw(password, BCrypt.gensalt()))
     val createdStaff = StaffsDAO.insert(Staff)
     createdStaff.map(s =>
       Ok(
