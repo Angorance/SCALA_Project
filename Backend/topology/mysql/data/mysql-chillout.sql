@@ -65,11 +65,11 @@ CREATE TABLE `Chat` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `DrikBlackList`
+-- Structure de la table `DrinkBlackList`
 --
 
 DROP TABLE IF EXISTS `DrinkBlackList`;
-CREATE TABLE `DrikBlackList` (
+CREATE TABLE `DrinkBlackList` (
   `idx_drink` int(11) NOT NULL,
   `idx_blackList` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -89,7 +89,8 @@ CREATE TABLE `Drink` (
   `rankingValue` int(11) NOT NULL,
   `nbRanking` int(11) NOT NULL,
   `isArchived` tinyint(1) NOT NULL,
-  `picture` varchar(512) DEFAULT NULL
+  `picture` varchar(512) DEFAULT NULL,
+  `price` double(8,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -166,9 +167,9 @@ ALTER TABLE `Chat`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `DrikBlackList`
+-- Index pour la table `DrinkBlackList`
 --
-ALTER TABLE `DrikBlackList`
+ALTER TABLE `DrinkBlackList`
   ADD KEY `ref_blackList` (`idx_blackList`),
   ADD KEY `ref_drinks` (`idx_drink`);
 
@@ -225,9 +226,9 @@ ALTER TABLE `Beer`
   ADD CONSTRAINT `beer_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `DrikBlackList`
+-- Contraintes pour la table `DrinkBlackList`
 --
-ALTER TABLE `DrikBlackList`
+ALTER TABLE `DrinkBlackList`
   ADD CONSTRAINT `ref_blackList` FOREIGN KEY (`idx_blackList`) REFERENCES `BlackList` (`id`);
 
 --

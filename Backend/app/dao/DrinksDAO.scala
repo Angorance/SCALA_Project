@@ -23,9 +23,10 @@ trait DrinksComponent {
     def rankingValue = column[Int]("RANKINGVALUE")
     def nbRanking = column[Int]("NBRANKING")
     def picture = column[String]("PICTURE")
+    def price = column[Double]("PRICE")
 
     // Map the attributes with the model; the ID is optional.
-    def * = (id.?, name, volume, description, isArchived, picture, rankingValue, nbRanking) <> (Drink.tupled, Drink.unapply)
+    def * = (id.?, name, volume, description, isArchived, picture, rankingValue, nbRanking, price) <> (Drink.tupled, Drink.unapply)
   }
 
   lazy val drinks = TableQuery[DrinksTable]

@@ -1,9 +1,27 @@
-@(title: String, drinks: Seq[(Drink,Beer)], softDrink: Seq[(Drink,SoftDrink)])
+@(title: String, beers: Seq[(Drink,Beer)], softDrink: Seq[(Drink,SoftDrink)])
 
 @layout(title) {
-    <h1>Drinks</h1>
-    <p>Here is all the drinks of the Chillout</p>
-
-
-
+    <div class="container">
+        <h1>Drinks</h1>
+        <p>Here is all the drinks of the Chillout</p>
+        <h2>Beers</h2>
+        <div>
+            @for((drink, beer) <- beers) {
+                <div class="row">
+                    <div class="col-md-4">Picture</div>
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="col-md-6">@drink.name</div>
+                            <div class="col-md-6">@beer.provenance</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">@drink.volume cl</div>
+                            <div class="col-md-6">@beer.provenance</div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+                </div>
+            }
+        </div>
+    </div>
 }
