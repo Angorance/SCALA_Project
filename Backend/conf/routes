@@ -26,9 +26,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 GET     /chat                       controllers.ChatController.chat
 
-GET    /drinks                      controllers.DrinksController.getDrinks
+GET     /drinks                      controllers.DrinksController.getDrinks
 
-GET    /about                       controllers.AboutController.about
+GET     /about                       controllers.AboutController.about
 
 POST    /authentication             controllers.StaffsController.signIn
 

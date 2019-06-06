@@ -27,15 +27,52 @@ USE `mysql-chillout`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Drink`
+--
+
+DROP TABLE IF EXISTS `Drink`;
+CREATE TABLE `Drink` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `volume` int(11) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `description` varchar(512) DEFAULT NULL,
+  `rankingValue` int(11) NOT NULL,
+  `nbRanking` int(11) NOT NULL,
+  `isArchived` tinyint(1) NOT NULL,
+  `picture` varchar(1024) DEFAULT NULL,
+  `price` double(8,2) NOT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Beer`
 --
 
 DROP TABLE IF EXISTS `Beer`;
 CREATE TABLE `Beer` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `provenance` varchar(256) NOT NULL,
   `alcool` varchar(128) NOT NULL,
-  `idx_drink` int(11) NOT NULL
+  `idx_drink` int(11) NOT NULL,
+  FOREIGN KEY(`idx_drink`) REFERENCES Drink(`id`),
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `SoftDrink`
+--
+
+DROP TABLE IF EXISTS `SoftDrink`;
+CREATE TABLE `SoftDrink` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idx_drink` int(11) NOT NULL,
+  FOREIGN KEY(`idx_drink`) REFERENCES Drink(`id`),
+  PRIMARY KEY(`id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -46,8 +83,9 @@ CREATE TABLE `Beer` (
 
 DROP TABLE IF EXISTS `BlackList`;
 CREATE TABLE `BlackList` (
-  `id` int(11) NOT NULL,
-  `mac` varchar(20) NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mac` varchar(20) NOT NULL,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -58,8 +96,9 @@ CREATE TABLE `BlackList` (
 
 DROP TABLE IF EXISTS `Chat`;
 CREATE TABLE `Chat` (
-  `id` int(11) NOT NULL,
-  `chatId` varchar(32) CHARACTER SET utf8 NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chatId` varchar(32) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -71,39 +110,11 @@ CREATE TABLE `Chat` (
 DROP TABLE IF EXISTS `DrinkBlackList`;
 CREATE TABLE `DrinkBlackList` (
   `idx_drink` int(11) NOT NULL,
-  `idx_blackList` int(11) NOT NULL
+  `idx_blackList` int(11) NOT NULL,
+  FOREIGN KEY(`idx_drink`) REFERENCES Drink(`id`),
+  FOREIGN KEY(`idx_blackList`) REFERENCES BlackList(`id`),
+  PRIMARY KEY(`idx_drink`, `idx_blackList`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `Drink`
---
-
-DROP TABLE IF EXISTS `Drink`;
-CREATE TABLE `Drink` (
-  `id` int(11) NOT NULL,
-  `volume` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `description` varchar(512) DEFAULT NULL,
-  `rankingValue` int(11) NOT NULL,
-  `nbRanking` int(11) NOT NULL,
-  `isArchived` tinyint(1) NOT NULL,
-  `picture` varchar(512) DEFAULT NULL,
-  `price` double(8,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `SoftDrink`
---
-
-DROP TABLE IF EXISTS `SoftDrink`;
-CREATE TABLE `SoftDrink` (
-  `id` int(11) NOT NULL,
-  `idx_drink` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -113,9 +124,11 @@ CREATE TABLE `SoftDrink` (
 
 DROP TABLE IF EXISTS `Staff`;
 CREATE TABLE `Staff` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(1024) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
-  `pseudo` varchar(64) CHARACTER SET utf8 NOT NULL
+  `pseudo` varchar(64) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY(`id`)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,8 +139,9 @@ CREATE TABLE `Staff` (
 
 DROP TABLE IF EXISTS `Storage`;
 CREATE TABLE `Storage` (
-  `id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -140,9 +154,28 @@ DROP TABLE IF EXISTS `StorageDrink`;
 CREATE TABLE `StorageDrink` (
   `idx_drink` int(11) NOT NULL,
   `idx_storage` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `quantity` int(11) NOT NULL,
+  FOREIGN KEY(`idx_drink`) REFERENCES Drink(`id`),
+  FOREIGN KEY(`idx_storage`) REFERENCES Storage(`id`),
+  PRIMARY KEY(`idx_drink`, `idx_storage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `Drink` (`id`, `volume`, `name`, `description`, `rankingValue`, `nbRanking`, `isArchived`, `picture`, `price`)
+VALUES
+(NULL, '33', 'Punk IPA', 'Greate IPA with pale color', '4.9', '245', '0', 'https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.beerhawk.co.uk%2Fmedia%2Fcatalog%2Fproduct%2Fb%2Fr%2Fbrewdog_punkipa_2.jpg&f=1', '3'),
+(NULL, '33', 'Hazy Jane', 'Juste a awesome NEIPA', '5', '2044', '0', 'https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fproducts1.imgix.drizly.com%2Fci-brewdog-hazy-jane-ipa-583f8d5af4f88cb9.png%3Fauto%3Dformat%252Ccompress%26fm%3Djpeg%26q%3D20&f=1', '3'),
+(NULL, '50', 'Club Mate', 'Softdrink made with mate tea', '4.5', '199', '0', 'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fswiatshishy.pl%2F2043-home_default%2Fclub-mate-05l.jpg&f=1', '2')
+;
+
+INSERT INTO `Beer` (`id`, `provenance`, `alcool`, `idx_drink`)
+VALUES
+(NULL, 'Brewdog - Scotland', '5.6', '1'),
+(NULL, 'Brewdog - Scotland', '7.2', '2')
+;
+
+INSERT INTO `SoftDrink` (`id`, `idx_drink`)
+VALUES
+(NULL, '3');
 --
 -- Index pour les tables déchargées
 --
@@ -150,70 +183,32 @@ CREATE TABLE `StorageDrink` (
 --
 -- Index pour la table `Beer`
 --
-ALTER TABLE `Beer`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_drink` (`idx_drink`);
-
---
--- Index pour la table `BlackList`
---
-ALTER TABLE `BlackList`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Chat`
---
-ALTER TABLE `Chat`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `Beer`
+--  ADD UNIQUE KEY `idx_drink` (`idx_drink`);
 
 --
 -- Index pour la table `DrinkBlackList`
 --
-ALTER TABLE `DrinkBlackList`
-  ADD KEY `ref_blackList` (`idx_blackList`),
-  ADD KEY `ref_drinks` (`idx_drink`);
-
---
--- Index pour la table `Drink`
---
-ALTER TABLE `Drink`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `DrinkBlackList`
+--  ADD KEY `ref_blackList` (`idx_blackList`),
+--  ADD KEY `ref_drinks` (`idx_drink`);
 
 --
 -- Index pour la table `SoftDrink`
 --
-ALTER TABLE `SoftDrink`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `idx_drink` (`idx_drink`);
-
---
--- Index pour la table `Staff`
---
-ALTER TABLE `Staff`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Storage`
---
-ALTER TABLE `Storage`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `SoftDrink`
+--  ADD UNIQUE KEY `idx_drink` (`idx_drink`);
 
 --
 -- Index pour la table `StorageDrink`
 --
-ALTER TABLE `StorageDrink`
-  ADD KEY `ref_drink` (`idx_drink`),
-  ADD KEY `ref_storage` (`idx_storage`,`idx_drink`) USING BTREE;
+-- ALTER TABLE `StorageDrink`
+--  ADD KEY `ref_drink` (`idx_drink`),
+--  ADD KEY `ref_storage` (`idx_storage`,`idx_drink`) USING BTREE;
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
---
--- AUTO_INCREMENT pour la table `Staff`
---
-ALTER TABLE `Staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -222,33 +217,33 @@ ALTER TABLE `Staff`
 --
 -- Contraintes pour la table `Beer`
 --
-ALTER TABLE `Beer`
-  ADD CONSTRAINT `beer_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ALTER TABLE `Beer`
+--  ADD CONSTRAINT `beer_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `DrinkBlackList`
 --
-ALTER TABLE `DrinkBlackList`
-  ADD CONSTRAINT `ref_blackList` FOREIGN KEY (`idx_blackList`) REFERENCES `BlackList` (`id`);
+-- ALTER TABLE `DrinkBlackList`
+--  ADD CONSTRAINT `ref_blackList` FOREIGN KEY (`idx_blackList`) REFERENCES `BlackList` (`id`);
 
 --
 -- Contraintes pour la table `Drink`
 --
-ALTER TABLE `Drink`
-  ADD CONSTRAINT `Drink_ibfk_1` FOREIGN KEY (`id`) REFERENCES `SoftDrink` (`id`);
+-- ALTER TABLE `Drink`
+--  ADD CONSTRAINT `Drink_ibfk_1` FOREIGN KEY (`id`) REFERENCES `SoftDrink` (`id`);
 
 --
 -- Contraintes pour la table `SoftDrink`
 --
-ALTER TABLE `SoftDrink`
-  ADD CONSTRAINT `softDring_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+-- ALTER TABLE `SoftDrink`
+--  ADD CONSTRAINT `softDring_gen_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `StorageDrink`
 --
-ALTER TABLE `StorageDrink`
-  ADD CONSTRAINT `ref_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`),
-  ADD CONSTRAINT `ref_storage` FOREIGN KEY (`idx_storage`) REFERENCES `Storage` (`id`);
+-- ALTER TABLE `StorageDrink`
+--  ADD CONSTRAINT `ref_drink` FOREIGN KEY (`idx_drink`) REFERENCES `Drink` (`id`),
+--  ADD CONSTRAINT `ref_storage` FOREIGN KEY (`idx_storage`) REFERENCES `Storage` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
