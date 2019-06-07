@@ -3454,7 +3454,7 @@
 		}
 		else
 		{
-			/* Table is empty - create a row with an empty message in it */
+			/* Table is empty - create a row with an empty messages in it */
 			var sZero = oLang.sZeroRecords;
 			if ( oSettings.iDraw == 1 &&  _fnDataSource( oSettings ) == 'ajax' )
 			{
@@ -4704,7 +4704,7 @@
 		// If there is default sorting required - let's do it. The sort function
 		// will do the drawing for us. Otherwise we draw the table regardless of the
 		// Ajax source - this allows the table to look initialised for Ajax sourcing
-		// data (show 'loading' message possibly)
+		// data (show 'loading' messages possibly)
 		_fnReDraw( settings );
 	
 		// Server-side processing init complete is done by _fnAjaxUpdateDraw
@@ -6395,10 +6395,10 @@
 	
 	
 	/**
-	 * Log an error message
+	 * Log an error messages
 	 *  @param {object} settings dataTables settings object
 	 *  @param {int} level log error messages, or display them to the user
-	 *  @param {string} msg error message
+	 *  @param {string} msg error messages
 	 *  @param {int} tn Technical note id to get more information about the error.
 	 *  @memberof DataTable#oApi
 	 */
@@ -10029,7 +10029,7 @@
 		 *       "url": "data.json",
 		 *       "dataSrc": function ( json ) {
 		 *         for ( var i=0, ien=json.length ; i<ien ; i++ ) {
-		 *           json[i][0] = '<a href="/message/'+json[i][0]+'>View message</a>';
+		 *           json[i][0] = '<a href="/messages/'+json[i][0]+'>View messages</a>';
 		 *         }
 		 *         return json;
 		 *       }
@@ -11562,7 +11562,7 @@
 	
 			/**
 			 * When using Ajax sourced data and during the first draw when DataTables is
-			 * gathering the data, this message is shown in an empty row in the table to
+			 * gathering the data, this messages is shown in an empty row in the table to
 			 * indicate to the end user the the data is being loaded. Note that this
 			 * parameter is not used when loading data by server-side processing, just
 			 * Ajax sourced data with client-side processing.

@@ -73,7 +73,19 @@ class BeersDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
   }
 
   /** Insert a new beer, then return it. */
-  def insert(beer: Beer): Future[Beer] = {
+  def insert(drink: Drink, beerData: Beer): Future[Beer] = {
+    val insertDrinkQuery = drinks returning drinks.map(_.id) into ((Drink, id) => Drink.copy(Some(id)))
+    val insertedDrink = db.run(insertDrinkQuery += drink)
+    var beer: Beer = null
+    insertedDrink.map(d => {
+        if (d.id != null) {
+          beer = new Beer(null, d.id.get, beerData.provenance, beerData.alcool)
+        } else {
+          throw new Error("no drink added or no id")
+        }
+      }
+    )
+
     val insertQuery = Beers returning Beers.map(_.id) into ((beer, id) => beer.copy(Some(id)))
     db.run(insertQuery += beer)
   }

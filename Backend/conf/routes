@@ -6,7 +6,7 @@
 #GET     /                           controllers.HomeController.index
 # An example controller showing how to use dependency injection
 # An example controller showing how to write asynchronous code
-#GET     /message                    controllers.AsyncController.message
+#GET     /messages                    controllers.AsyncController.messages
 
 # Map static resources from the /public folder to the /assets URL path
 
@@ -29,6 +29,10 @@ GET     /chat                       controllers.ChatController.chat
 GET     /drinks                      controllers.DrinksController.getDrinks
 
 GET     /about                       controllers.AboutController.about
+
+GET     /newBeer                    controllers.BeersController.getNewBeer
+
+POST    /newBeer                    controllers.BeersController.createBeer
 
 POST    /authentication             controllers.StaffsController.signIn
 

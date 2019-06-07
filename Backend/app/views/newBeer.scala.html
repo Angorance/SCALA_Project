@@ -1,0 +1,63 @@
+@import helper._
+@(userForm: Form[CreateBeerForm])(implicit messages: Messages)
+
+@layout("New Beer") {
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    New Beer
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @form(action = routes.BeersController.createBeer()) {
+                    @inputText(userForm("name"))
+                    @inputText(userForm("volume"))
+                    @textarea(userForm("description"))
+                    @inputText(userForm("provenance"))
+                    @inputText(userForm("price"))
+                    @inputText(userForm("alcool"))
+
+                    <input type="submit" value="Submit">
+                    }
+                @*<form role="form" method="POST" action=@routes.BeersController.createBeer() ><!-- action ? -->
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="hidden" name="action" value="newBeer">
+                            <label>Name</label>
+                            <input id="name" name="name" class="form-control" placeholder="Enter the name of the beer" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name ="description"  id="inputDescription" class="form-control" placeholder="Enter the description of the beer" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Volume</label>
+                            <input name ="volume" type="number" id="inputVolume" class="form-control" placeholder="Enter the volume of the beer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Picture</label>
+                            <input name ="picture" type="url" id="inputPicture" class="form-control" placeholder="Enter the url of the picture" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Provenance</label>
+                            <input name ="provenance" type="text" id="inputProvenance" class="form-control" placeholder="Enter the provenance" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Alcool</label>
+                            <input name ="alcool" type="number" step="0.001" id="inputAlcool" class="form-control" placeholder="Enter the alcool" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input name ="price" type="number" id="inputPrice" class="form-control" placeholder="Enter the price" required>
+                        </div>
+                        <button id="bLoginLocator" type="submit" class="btn btn-primary">Add</button>
+                    </fieldset>
+                </form>*@
+            </div>
+        </div>
+
+    </div>
+}

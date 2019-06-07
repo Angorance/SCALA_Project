@@ -70,7 +70,7 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
         Json.obj(
           "status" -> "OK",
           "id" -> s.id,
-          "message" -> ("Staff '" + s.pseudo + " saved.")
+          "messages" -> ("Staff '" + s.pseudo + " saved.")
         )
       )
     )
@@ -88,7 +88,7 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
         // Send back a 404 Not Found HTTP status to the client if the Staff does not exist.
         NotFound(Json.obj(
           "status" -> "Not Found",
-          "message" -> ("Staff #" + StaffId + " not found.")
+          "messages" -> ("Staff #" + StaffId + " not found.")
         ))
     }
   }
@@ -105,12 +105,12 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
       case 1 => Ok(
         Json.obj(
           "status" -> "OK",
-          "message" -> ("Staff '" + newStaff.pseudo + "' updated.")
+          "messages" -> ("Staff '" + newStaff.pseudo + "' updated.")
         )
       )
       case 0 => NotFound(Json.obj(
         "status" -> "Not Found",
-        "message" -> ("Staff #" + StaffId + " not found.")
+        "messages" -> ("Staff #" + StaffId + " not found.")
       ))
     }
   }
@@ -123,12 +123,12 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
       case 1 => Ok(
         Json.obj(
           "status"  -> "OK",
-          "message" -> ("Staff #" + StaffId + " deleted.")
+          "messages" -> ("Staff #" + StaffId + " deleted.")
         )
       )
       case 0 => NotFound(Json.obj(
         "status" -> "Not Found",
-        "message" -> ("Staff #" + StaffId + " not found.")
+        "messages" -> ("Staff #" + StaffId + " not found.")
       ))
     }
   }
@@ -141,13 +141,13 @@ class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO)
       case Some(s) if BCrypt.checkpw(password, s.password)=> Ok(Json.toJson(s)) // TODO should return jwt
       case Some(s) => NotFound(Json.obj(
         "status" -> "Not Found",
-        "message" -> ("Staff Wrong password")
+        "messages" -> ("Staff Wrong password")
       ))
       case None =>
         // Send back a 404 Not Found HTTP status to the client if the Staff does not exist.
         NotFound(Json.obj(
           "status" -> "Not Found",
-          "message" -> ("Staff " + pseudo + " do not exist")
+          "messages" -> ("Staff " + pseudo + " do not exist")
         ))
     }
   }

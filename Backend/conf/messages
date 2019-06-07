@@ -1,0 +1,9 @@
+name = Name
+volume = Volume
+description = Description
+provenance = Provenance
+price = Price
+alcool = Alcool
+
+
+beer.created = You have successfully created a user!
