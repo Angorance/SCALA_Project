@@ -38,6 +38,21 @@ Par manque de temps, nous nous sommes  fixé de faire:
 - L'affichage des bières et des boissons sans  alcool.
 - L'ajout de nouvelles bières.
 
+## Partie Telegram
+
+Pour cette partie, nous avons 2 choses. Tout d'abord, il y a un bouton accessible depuis la page princiale qui sert à faire une demande de staff. Ensuite, il y a une page formulaire accessible depuis le menu qui permet de changer le chat sur lequel le bot Telegram envoie la requête.
+
+La création du bot Telegram s'est faite très facilement grâce au bot officiel prévu de Telegram. Ensuite, il a simplement fallu trouver l'id du chat (plusieurs bot disponibles le permettent).
+
+Au niveau Play/Slick, nous avons créé une DAO pour le chat de sorte à pouvoir récupérer et changer le id du chat. Pour cette partie, nous avons pris la décision de ne garder qu'un seul id à la fois, de manière à ce que le bot ne puisse être "associé" qu'à un seul chat à la fois. Nous avons donc une fonction qui supprime tout et ajoute le nouveau chatId lorsqu'on remplit le formulaire prévu à cet effet.
+
+Ensuite, nous avons simplement ajouté un contrôleur lié au bouton pour demander un staff, nous avons fait appel à la DAO pour récupérer le chatId et utilisé ce dernier pour envoyer un message sur le groupe en question grâce à l'API Telegram et la méthode sendMessage.
+
+Tout ceci est fonctionnel. Les seules choses qu'il reste à faire c'est :
+
+1. Mettre le token du bot Telegram dans des variables d'environnement (actuellement en dur dans le code, pas safe)
+2. Mettre l'accès au formulaire pour changer le chat id dans la partie admin.
+
 # Problèmes rencontrés
 
 Notre manque de connaissance  dans *Play* et *Slick* nous a posé un  nombre de problèmes considérable et une perte de temps folle. Nous avons dû nous  reprendre à plusieurs fois sur la modélisation de nos *modèles*, *DAO* et *controllers*. 
