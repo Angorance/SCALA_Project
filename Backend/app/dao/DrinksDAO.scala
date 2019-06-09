@@ -7,6 +7,9 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+  * DAO intéragissant avec la table Drink
+  */
 // We use a trait component here in order to share the DrinksTable class with other DAO, thanks to the inheritance.
 trait DrinksComponent {
   self: HasDatabaseConfigProvider[JdbcProfile] =>
@@ -46,17 +49,6 @@ class DrinksDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
     val query = drinks.sortBy(s => s.name)
     db.run(query.result)
   }
-
-  /** Retrieve the names (first and last names) and the age of the Drinks, whose age is inferior of the given one,
-    * then sort the results by last name, then first name */
-  /*def findIfAgeIsInferior(age: Int): Future[Seq[(String, String, Int)]] = {
-    val query = (for {
-      student <- Drinks
-      if student.age < age
-    } yield (student.firstName, student.lastName, student.age)).sortBy(s => (s._2, s._1))
-
-    db.run(query.result)
-  }*/
 
   /** Retrieve a Drink from the id. */
   def findById(id: Long): Future[Option[Drink]] =

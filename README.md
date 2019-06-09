@@ -16,6 +16,10 @@ Et une partie accessible à tous pour voir  les articles et leurs informations, 
 - Developpement de l'application en fullstack avec le framework Play (Scala)
 - Base de données SQL avec Slick. Notre application n'ayant pas  de critère spécifique, partir sur une base de données SQL assez simple paraît  être la meilleure solution.
 
+# Environment de test
+
+Pour pouvoir run le projet en local, il faut lancer le docker-compose situé dans le dossie topology. Ce dernier lancera la base de données avec un phpmyadmin.
+
 # Conception
 
 Nous avons commencé par  réaliser un [UML](about:./Doc/Modelisation/SCALA_Project_UML.sly) de la base de  données. Cela nous a permis de savoir les différents modèles et DAO qu'on devait  développer.
@@ -37,6 +41,21 @@ Par manque de temps, nous nous sommes  fixé de faire:
 - La demande d'un serveur via un chanel *Telegram*.
 - L'affichage des bières et des boissons sans  alcool.
 - L'ajout de nouvelles bières.
+
+## Partie Telegram
+
+Pour cette partie, nous avons 2 choses. Tout d'abord, il y a un bouton accessible depuis la page princiale qui sert à faire une demande de staff. Ensuite, il y a une page formulaire accessible depuis le menu qui permet de changer le chat sur lequel le bot Telegram envoie la requête.
+
+La création du bot Telegram s'est faite très facilement grâce au bot officiel prévu de Telegram. Ensuite, il a simplement fallu trouver l'id du chat (plusieurs bot disponibles le permettent).
+
+Au niveau Play/Slick, nous avons créé une DAO pour le chat de sorte à pouvoir récupérer et changer le id du chat. Pour cette partie, nous avons pris la décision de ne garder qu'un seul id à la fois, de manière à ce que le bot ne puisse être "associé" qu'à un seul chat à la fois. Nous avons donc une fonction qui supprime tout et ajoute le nouveau chatId lorsqu'on remplit le formulaire prévu à cet effet.
+
+Ensuite, nous avons simplement ajouté un contrôleur lié au bouton pour demander un staff, nous avons fait appel à la DAO pour récupérer le chatId et utilisé ce dernier pour envoyer un message sur le groupe en question grâce à l'API Telegram et la méthode sendMessage.
+
+Tout ceci est fonctionnel. Les seules choses qu'il reste à faire c'est :
+
+1. Mettre le token du bot Telegram dans des variables d'environnement (actuellement en dur dans le code, pas safe)
+2. Mettre l'accès au formulaire pour changer le chat id dans la partie admin.
 
 # Problèmes rencontrés
 
@@ -64,6 +83,14 @@ De plus, les formulaires nécessitent des  *MessagesProvider* avec lesquels, nou
 La personnalisation de ces formulaires  avec notre propre style nous a paru plus complexe que ça ne devrait  l'être.
 
 Tous ces petits problèmes accumulés nous  firent perdre un temps qui nous empêcha de faire plus de  fonctionnalité.
+
+Par manque de temps, nous n'avons pas pu implémenter:
+
+- La gestion des sessions
+- L'ajout de boisson
+- La modification de boisson
+- Les votes/ratings
+- Le detail d'une boisson
 
 # Conclusion
 

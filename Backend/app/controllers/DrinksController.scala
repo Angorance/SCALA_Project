@@ -7,6 +7,12 @@ import play.api.mvc.{AbstractController, ControllerComponents}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
+/**
+  * Controlleur gérant les boissons
+  * @param cc
+  * @param BeersDAO
+  * @param SoftDrinksDAO
+  */
 @Singleton
 class DrinksController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO, SoftDrinksDAO: SoftDrinksDAO) extends AbstractController(cc) {
 

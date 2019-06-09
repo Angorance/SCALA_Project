@@ -12,6 +12,11 @@ import org.mindrot.jbcrypt.BCrypt
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
+/**
+  * Controlleur gérant les requête concerant le staff (utilisateur)
+  * @param cc
+  * @param StaffsDAO
+  */
 @Singleton
 class StaffsController @Inject()(cc: ControllerComponents, StaffsDAO: StaffsDAO) extends AbstractController(cc) {
 

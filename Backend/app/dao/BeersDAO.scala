@@ -7,6 +7,9 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+  * DAO intéragissant avec la table Beer
+  */
 // We use a trait component here in order to share the BeersTable class with other DAO, thanks to the inheritance.
 trait BeersComponent extends DrinksComponent {
   self: HasDatabaseConfigProvider[JdbcProfile] =>
