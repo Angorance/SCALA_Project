@@ -13,11 +13,8 @@ Il y aurait donc une partie staff pour pouvoir entrer les données (articles, pr
 Et une partie accessible à tous pour voir  les articles et leurs informations, pour pouvoir "appeler" un staff si personne  n'est présent et pour pouvoir noter les articles. Pour cette partie, on part  sans authentification, sur une base de confiance.
 
 ## Technologies
-
-- Back-end en REST API.
-- Front-end Android et/ou Web
+- Developpement de l'application en fullstack avec le framework Play (Scala)
 - Base de données SQL avec Slick. Notre application n'ayant pas  de critère spécifique, partir sur une base de données SQL assez simple paraît  être la meilleure solution.
-- Flutter dans le cas où on partirait sur on frontend Android.  Plus rapide à prendre en main, cross-plateforme.
 
 # Conception
 
@@ -58,7 +55,7 @@ Nous avons pas bien compris la génération  de formulaire de Play, ce dernier p
 - [`checked`](https://www.playframework.com/documentation/2.6.x/api/scala/play/api/data/Forms$.html#checked%3AMapping[Boolean]): maps to `scala.Boolean`.
 - [`optional`](https://www.playframework.com/documentation/2.6.x/api/scala/play/api/data/Forms$.html): maps to `scala.Option`.
 
-*Source:  doc officiel  Play*
+*Source: la doc officielle  Play*
 
 Mais aucun de ces types ne se  map directement avec un *float*. Celui qui s'en  rapproche le plus et le *bigDecimal,*  mais après des heures de recherches et de tests posent encore  problème.
 
