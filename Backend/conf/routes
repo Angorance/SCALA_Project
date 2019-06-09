@@ -36,4 +36,5 @@ POST        /authentication             controllers.StaffsController.signIn
 GET         /login                      controllers.LoginController.login
 
 POST        /chatForm                   controllers.ChatController.chatFormPost
+
 GET         /help                       controllers.ChatController.needHelp
