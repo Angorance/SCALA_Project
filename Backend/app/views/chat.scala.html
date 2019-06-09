@@ -1,5 +1,6 @@
+@import helper._
 
-@(chatId: String)
+@(chatForm: Form[NewChatForm])(implicit messages: Messages)
 
 @layout("Chat") {
     <div id="page-wrapper">
@@ -12,14 +13,20 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <form method="POST" role="form" action="pages/app?operation=${operation}&id=${id}">
+                <!--<form method="POST" role="form" action="pages/app?operation=${operation}&id=${id}">
                     <div class="form-group">
                         <label>Application name</label>
                         <input id="tfNameLocator" class="form-control" name="name" value="chatId" placeholder="Enter Chat ID">
 
                     </div>
-                    <a id="bCancelLocator" class="btn btn-danger" href="" role="button">Sumbmit</a>
-                </form>
+                    <a id="bCancelLocator" class="btn btn-danger" href="" role="button">Submit</a>
+                </form>-->
+
+                @form(action = routes.ChatController.chatFormPost()) {
+                    @inputText(chatForm("chatId"))
+
+                    <input type="submit" value="Submit">
+                }
             </div>
         </div>
 

@@ -53,11 +53,11 @@ class ChatDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(
     db.run(chats.filter(_.id === id).result.headOption)
 
   /** Insert a new chat, then return it. */
-  def insert(Chat: Chat): Future[Chat] = {
+  def insert(chatId: String): Future[Chat] = {
     wipe()
 
-    val insertQuery = chats returning chats.map(_.id) into ((Chat, id) => Chat.copy(Some(id)))
-    db.run(insertQuery += Chat)
+    val insertQuery = chats.map(c => c.chatId) returning chats.map(_.id) into ((chatId, id) => Chat(Option(id), chatId))
+    db.run(insertQuery += chatId)
   }
 
   /** Deletes all chats */

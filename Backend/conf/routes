@@ -24,12 +24,14 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 #POST    /beers                      controllers.BeersController.createBeer
 
-GET     /chat                       controllers.ChatController.chat
+#GET     /chat                       controllers.ChatController.ge
 
-GET    /drinks                      controllers.DrinksController.getDrinks
+GET    /drinks                     controllers.DrinksController.getDrinks
 
-GET    /about                       controllers.AboutController.about
+GET    /about                      controllers.AboutController.about
 
-POST    /authentication             controllers.StaffsController.signIn
+POST   /authentication             controllers.StaffsController.signIn
 
-GET     /login                      controllers.LoginController.login
+GET    /login                      controllers.LoginController.login
+
+POST   /chatForm                   controllers.ChatController.chatFormPost
