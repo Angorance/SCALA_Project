@@ -26,7 +26,7 @@ class ChatController @Inject()(cc: ControllerComponents, chatDAO: ChatDAO) exten
   }
 
   /*def index = Action { implicit request =>
-    Ok(views.html.about)
+    Ok()
   }*/
 
   /*def postChatID = Action {
