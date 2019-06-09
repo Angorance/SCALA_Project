@@ -55,7 +55,7 @@ Nous avons pas bien compris la génération  de formulaire de Play, ce dernier p
 - [`checked`](https://www.playframework.com/documentation/2.6.x/api/scala/play/api/data/Forms$.html#checked%3AMapping[Boolean]): maps to `scala.Boolean`.
 - [`optional`](https://www.playframework.com/documentation/2.6.x/api/scala/play/api/data/Forms$.html): maps to `scala.Option`.
 
-*Source: la doc officielle  Play*
+*Source: la doc officielle de Play*
 
 Mais aucun de ces types ne se  map directement avec un *float*. Celui qui s'en  rapproche le plus et le *bigDecimal,*  mais après des heures de recherches et de tests posent encore  problème.
 
@@ -67,4 +67,4 @@ Tous ces petits problèmes accumulés nous  firent perdre un temps qui nous emp�
 
 # Conclusion
 
-Les problèmes rencontrés ne  furent pas liés aux manques de connaissances de *Scala,* mais  à l'utilisation de Play et Slick qui furent littéralement un enfer. Nous ne  voyons aucun cas où nous choisirons cette technologie dans un  futur projet  comparer à toutes les autres technologies sur le marché actuel. Nous avons,  finalement, que très peu codé en Scala et nous n'avons pas plus mettre en  pratique les forces de ce langage et du paradigme fonctionnel.  
+Les problèmes rencontrés ne  furent pas liés aux manques de connaissances de *Scala,* mais  à l'utilisation de Play et Slick qui furent littéralement un enfer. Nous ne  voyons aucun cas où nous choisirons cette technologie dans un  futur projet  comparé à toutes les autres technologies sur le marché actuel. Nous avons,  finalement, que très peu codé en Scala et nous n'avons pas pu mettre en  pratique les forces de ce langage et du paradigme fonctionnel.  
