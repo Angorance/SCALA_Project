@@ -8,11 +8,9 @@ Châtillon Jérémie, Gonzalez Lopez Daniel,  Smith James
 
 Le but de ce projet est de réaliser une  application pour le ChillOut permettant de consulter les articles (infos, prix,  popularité), d'attribuer des notes à ces derniers et de pouvoir demander un  serveur s'il n'y a personne sur place. La requête serait alors transmise aux  staffs via un groupe Telegram, où ils pourront s'organiser.
 
-Il y aurait donc une partie staff pour  entrer les données (articles, prix, ...) s'il y a besoin de quelqu'un au  ChillOut. Cette partie a besoin d'un système  d'authentification.
+Il y aurait donc une partie staff pour pouvoir entrer les données (articles, prix, ...) qui nécessitera une authentification. 
 
 Et une partie accessible à tous pour voir  les articles et leurs informations, pour pouvoir "appeler" un staff si personne  n'est présent et pour pouvoir noter les articles. Pour cette partie, on part  sans authentification, sur une base de confiance.
-
-Note : Une autre solution pour remplacer  les notifications serait de passer par un groupe Telegram. Le backend  s'occuperait donc d'émettre un message Telegram sur un groupe donné pour  prévenir de la nécessité d'un staff.
 
 ## Technologies
 
