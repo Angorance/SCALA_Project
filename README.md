@@ -15,6 +15,7 @@ Et une partie accessible à tous pour voir  les articles et leurs informations, 
 ## Technologies
 - Developpement de l'application en fullstack avec le framework Play (Scala)
 - Base de données SQL avec Slick. Notre application n'ayant pas  de critère spécifique, partir sur une base de données SQL assez simple paraît  être la meilleure solution.
+- Utilisation d'un style Bootsrap.
 
 # Environment de test
 
@@ -80,7 +81,7 @@ Mais aucun de ces types ne se  map directement avec un *float*. Celui qui s'en  
 
 De plus, les formulaires nécessitent des  *MessagesProvider* avec lesquels, nous avons rencontré des problèmes de  version.
 
-La personnalisation de ces formulaires  avec notre propre style nous a paru plus complexe que ça ne devrait  l'être.
+La personnalisation de ces formulaires  avec notre propre style nous a paru plus complexe que ça ne devrait  l'être.  Le style boostrap fonctionne bien chez Jérémie qui a un Windows mais pas complètement chez Daniel (MAC) et James(Linux). Le menu ne s'affiche pas correctement, on ne sait toujours pas pourquoi.
 
 Tous ces petits problèmes accumulés nous  firent perdre un temps qui nous empêcha de faire plus de  fonctionnalité.
 
