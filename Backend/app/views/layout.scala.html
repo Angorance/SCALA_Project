@@ -40,7 +40,7 @@
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></link>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
@@ -52,17 +52,18 @@
                 <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <button type="button" >
+<<<<<<< HEAD
+                    <button type="button" class="btn btn-primary" >
                         Need a server
                     </button>
+=======
+>>>>>>> master
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                     </button>
 
-                    <a class="navbar-brand" href="index.html">Chillout spam tender</a>
+                    @*<a class="navbar-brand" href="index.html">Chillout spam tender</a>*@
                 </div>
                     <!-- /.navbar-header -->
 
@@ -78,7 +79,7 @@
                             <li><a><i class="fa fa-user fa-fw"></i>${principal}</a></li>
                             <li class="divider"></li>
                             -->
-                            <li><a href="@routes.ChatController.chat()"><i class="fa fa-cog fa-fw"></i> Chat ID</a>
+                            <li><a href="toto"><i class="fa fa-cog fa-fw"></i> Chat ID</a>
                             </li>
 
                             <li class="divider"></li>
@@ -108,6 +109,9 @@
                 </div>
                     <!-- /.navbar-static-side -->
             </nav>
+
+            <input type="submit" onclick="location.href='@routes.ChatController.needHelp()'" value="Need a staff" />
+
             <article>
                 @* And here's where we render the `Html` object containing
                 * the page content. *@

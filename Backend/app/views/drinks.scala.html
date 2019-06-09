@@ -1,4 +1,4 @@
-@(title: String, beers: Seq[(Drink,Beer)], softDrink: Seq[(Drink,SoftDrink)])
+@(title: String, beers: Seq[(Drink,Beer)], softDrinks: Seq[(Drink,SoftDrink)])
 
 @layout(title) {
     <div class="container">
@@ -8,7 +8,7 @@
         <div>
             @for((drink, beer) <- beers) {
                 <div class="row">
-                    <div class="col-md-4">Picture</div>
+                    <div class="col-md-4"><img src="@drink.picture" style="width:100px;height:150px;"></div>
                     <div class="col-md-7">
                         <div class="row">
                             <div class="col-md-6">@drink.name</div>
@@ -16,12 +16,30 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">@drink.volume cl</div>
-                            <div class="col-md-6">@beer.provenance</div>
+                            <div class="col-md-6">@drink.price .-</div>
                         </div>
                     </div>
                     <div class="col-md-1"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
                 </div>
             }
+        </div>
+        <h2>SoftDrinks</h2>
+        <div>
+        @for((drink, softDrink) <- softDrinks) {
+            <div class="row">
+                <div class="col-md-4"><img src="@drink.picture" style="width:100px;height:125px;"></div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12">@drink.name</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">@drink.volume cl</div>
+                        <div class="col-md-6">@drink.price .-</div>
+                    </div>
+                </div>
+                <div class="col-md-1"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+            </div>
+        }
         </div>
     </div>
 }
