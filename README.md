@@ -90,7 +90,7 @@ Par manque de temps, nous n'avons pas pu implémenter:
 - L'ajout de boisson
 - La modification de boisson
 - Les votes/ratings
-- Le details d'une boisson
+- Le detail d'une boisson
 
 # Conclusion
 
