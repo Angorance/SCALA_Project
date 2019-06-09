@@ -13,7 +13,7 @@ trait ChatComponent {
   import profile.api._
 
   // This class convert the database's Chats table in a object-oriented entity: the Student model.
-  class ChatTable(tag: Tag) extends Table[Chat](tag, "CHAT") {
+  class ChatTable(tag: Tag) extends Table[Chat](tag, "Chat") {
     def id = column[Long]("ID", O.PrimaryKey, O.AutoInc) // Primary key, auto-incremented
     def chatId = column[String]("CHATID")
 
@@ -32,21 +32,10 @@ class ChatDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(
   val chats = TableQuery[ChatTable]
 
   /** Retrieve the list of Chats */
-  def list(): Future[Seq[Chat]] = {
-    val query = chats.sortBy(s => s.chatId)
-    db.run(query.result)
+  def list() = {
+    val query = chats.map(c => c.chatId)
+    db.run(query.take(1).result.head)
   }
-
-  /** Retrieve the names (first and last names) and the age of the Chats, whose age is inferior of the given one,
-    * then sort the results by last name, then first name */
-  /*def findIfAgeIsInferior(age: Int): Future[Seq[(String, String, Int)]] = {
-    val query = (for {
-      student <- Chats
-      if student.age < age
-    } yield (student.firstName, student.lastName, student.age)).sortBy(s => (s._2, s._1))
-
-    db.run(query.result)
-  }*/
 
   /** Retrieve a student from the id. */
   def findById(id: Long): Future[Option[Chat]] =
@@ -57,6 +46,7 @@ class ChatDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)(
     wipe()
 
     val insertQuery = chats.map(c => c.chatId) returning chats.map(_.id) into ((chatId, id) => Chat(Option(id), chatId))
+
     db.run(insertQuery += chatId)
   }
 
