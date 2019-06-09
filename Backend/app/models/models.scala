@@ -1,5 +1,9 @@
 package models
 
+/**
+  * Models correspondant au table de la db
+  */
+
 trait DrinkTrait {
   val id: Option[Long]
   val drinkId: Long

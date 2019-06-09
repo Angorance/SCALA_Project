@@ -11,6 +11,12 @@ import scala.concurrent._
 import ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
+/**
+  * Controlleur gérant les intéractions avec Telegram
+  * @param messagesAction
+  * @param cc
+  * @param chatDAO
+  */
 class ChatController @Inject()(messagesAction: MessagesActionBuilder, cc: ControllerComponents, chatDAO: ChatDAO) extends AbstractController(cc) {
 
   val chatForm: Form[NewChatForm] = Form(

@@ -7,6 +7,9 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+  * DAO intéragissant avec la table Chat
+  */
 trait ChatComponent {
   self: HasDatabaseConfigProvider[JdbcProfile] =>
 

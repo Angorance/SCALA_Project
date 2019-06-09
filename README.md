@@ -16,6 +16,10 @@ Et une partie accessible à tous pour voir  les articles et leurs informations, 
 - Developpement de l'application en fullstack avec le framework Play (Scala)
 - Base de données SQL avec Slick. Notre application n'ayant pas  de critère spécifique, partir sur une base de données SQL assez simple paraît  être la meilleure solution.
 
+# Environment de test
+
+Pour pouvoir run le projet en local, il faut lancer le docker-compose situé dans le dossie topology. Ce dernier lancera la base de données avec un phpmyadmin.
+
 # Conception
 
 Nous avons commencé par  réaliser un [UML](about:./Doc/Modelisation/SCALA_Project_UML.sly) de la base de  données. Cela nous a permis de savoir les différents modèles et DAO qu'on devait  développer.
@@ -79,6 +83,14 @@ De plus, les formulaires nécessitent des  *MessagesProvider* avec lesquels, nou
 La personnalisation de ces formulaires  avec notre propre style nous a paru plus complexe que ça ne devrait  l'être.
 
 Tous ces petits problèmes accumulés nous  firent perdre un temps qui nous empêcha de faire plus de  fonctionnalité.
+
+Par manque de temps, nous n'avons pas pu implémenter:
+
+- La gestion des sessions
+- L'ajout de boisson
+- La modification de boisson
+- Les votes/ratings
+- Le details d'une boisson
 
 # Conclusion
 

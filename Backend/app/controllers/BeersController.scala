@@ -10,6 +10,14 @@ import play.api.mvc.{AbstractController, ControllerComponents}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
+/**
+  * Fichier permettant de gérer les accès aux bière
+  * @param cc
+  * @param BeersDAO
+  * @Note Actuellement pas utilisé car nous travaillons uniquement avec les boissons (drinks).
+  *      Mais servira lors de l'ajout de bière ou modification de bière
+  */
+
 @Singleton
 class BeersController @Inject()(cc: ControllerComponents, BeersDAO: BeersDAO) extends AbstractController(cc) {
 
