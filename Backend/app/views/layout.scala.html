@@ -93,6 +93,9 @@
                             <li>
                                 <a id="AboutSideBar" href="@routes.AboutController.about()"><i class="fa fa-about fa-fw"></i> About</a>
                             </li>
+                            <li>
+                                <input type="submit" onclick="location.href='@routes.ChatController.needHelp()'" value="Need a staff" />
+                            </li>
 
                         </ul>
                     </div>
@@ -100,8 +103,6 @@
                 </div>
                     <!-- /.navbar-static-side -->
             </nav>
-
-            <input type="submit" onclick="location.href='@routes.ChatController.needHelp()'" value="Need a staff" />
 
             <article>
                 @* And here's where we render the `Html` object containing
