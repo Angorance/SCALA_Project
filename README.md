@@ -20,6 +20,9 @@ Et une partie accessible à tous pour voir  les articles et leurs informations, 
 # Environment de test
 
 Pour pouvoir run le projet en local, il faut lancer le docker-compose situé dans le dossie topology. Ce dernier lancera la base de données avec un phpmyadmin.
+Attention, selon votre OS,  n'oubliez pas de changer l'addresse ip pour accédé à la base de données.
+- Linux/Mac: localhost
+- Windows: 192.168.99.104
 
 # Conception
 
